@@ -23,7 +23,7 @@ module M = struct
           (int_of_string first :: left, int_of_string second :: right) )
     in
     Tuple2.map (left, right) ~f:List.rev
-
+    let sum t = Core.List.fold t ~f:(+) ~init:0
   (* Run part 1 with parsed inputs *)
   let part1 (left, right) =
     let left, right =
@@ -33,7 +33,7 @@ module M = struct
       List.mapi left ~f:(fun i x -> Int.abs (List.nth_exn right i - x))
     in
     print_endline_int (sum dists)
-
+    
   (* Run part 2 with parsed inputs *)
   let part2 (left, right) =
     let counter = Hashtbl.create (module Int) in

@@ -1,7 +1,7 @@
 (* Anything helper functions that would be imported for each module *)
 
 let print_endline_int i = print_endline (Int.to_string i)
-
+let sum t = Core.List.fold t ~f:(+) ~init:0
 let time f =
   let before = Unix.gettimeofday () in
   let result = f () in

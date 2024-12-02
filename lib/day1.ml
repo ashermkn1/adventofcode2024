@@ -31,7 +31,7 @@ module M = struct
         function None -> 1
           | Some c -> c + 1
       )
-      );
+    );
     let res = List.fold left ~init:0 ~f:(fun acc x -> 
       let count = Option.value (Hashtbl.find counter x) ~default:0 in
       acc + (x * count)) in

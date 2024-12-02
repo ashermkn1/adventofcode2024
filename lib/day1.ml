@@ -21,7 +21,7 @@ module M = struct
   let part1 (left, right) = 
     let (left, right) = Tuple2.map (left, right) ~f:(fun l -> List.sort l ~compare:Int.compare) in
     let dists = List.mapi left ~f:(fun i x -> Int.abs (List.nth_exn right i - x)) in
-    print_endline_int (List.reduce_exn ~f:(+) dists)
+    print_endline_int (Utils.sum dists)
 
   (* Run part 2 with parsed inputs *)
   let part2 (left, right) =

@@ -7,5 +7,8 @@
     cohttp-lwt-unix
     lwt_ssl
     ppx_expect
+    core_unix
+    ocamlgraph
+    cmdliner
   )
 )

@@ -1,8 +1,9 @@
-open Unix
+
 open Lwt
 open Cohttp
 open Cohttp_lwt_unix
-
+open Core_unix
+open Sys_unix
 let session_file = ".session"
 
 let year_file = ".year"
@@ -13,7 +14,7 @@ let get_token () =
   In_channel.close file ; String.trim token
 
 let get_year () =
-  if Caml.Sys.file_exists year_file then (
+  if file_exists_exn year_file then (
     let file = In_channel.open_text year_file in
     let year = In_channel.input_all file in
     In_channel.close file ;

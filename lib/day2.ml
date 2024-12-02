@@ -7,12 +7,11 @@ module M = struct
 
   (* Parse the input to type t, invoked for both parts *)
   let parse inputs =
-    let lines = String.split_on_chars ~on:['\n'] inputs in
-    List.map
-      ~f:(fun line ->
-        let split = String.split_on_chars ~on:[' '] line in
-        List.map split ~f:Int.of_string )
-      lines
+    inputs |> String.split_lines
+    |> List.map ~f:(fun line ->
+           line
+           |> String.split_on_chars ~on:[' ']
+           |> List.map ~f:Int.of_string )
 
   let sliding_window ~window_size lst =
     if window_size <= 0 then invalid_arg "Window size must be positive"
@@ -29,28 +28,19 @@ module M = struct
     let dist = Int.abs (a - b) in
     dist >= 1 && dist <= 3
 
-  (* Run part 1 with parsed inputs *)
-  let safe levels =
-    let res, _ =
-      List.fold (sliding_window ~window_size:2 levels) ~init:(true, 0)
-        ~f:(fun (res, ord) -> function
-        | [a; b] ->
-            if not res then (res, ord)
-            else
-              let ord_check, ord2 =
-                match (ord, Int.compare a b) with
-                | _, 0 -> (false, 0)
-                | 1, -1 -> (false, 0)
-                | -1, 1 -> (false, 0)
-                | 0, new_ord -> (res, new_ord)
-                | x, y when Int.equal x y -> (res, ord)
-                | _ -> (res, ord)
-              in
-              (ord_check && diff_check a b, ord2)
-        | _ -> failwith "unreachable" )
-    in
-    res
+  let xor a b = (a || b) && not (a && b)
 
+  
+  let safe levels =
+    let up, down, range =
+      List.fold (sliding_window ~window_size:2 levels)
+        ~init:(true, true, true) ~f:(fun (up, down, range) window ->
+          match window with
+          | [a; b] -> (up && a < b, down && a > b, range && diff_check a b)
+          | _ -> failwith "unreachable" )
+    in
+    xor up down && range
+  (* Run part 1 with parsed inputs *)
   let part1 reports =
     let res = List.count ~f:safe reports in
     printf "Part 1: %d\n" res ; ()

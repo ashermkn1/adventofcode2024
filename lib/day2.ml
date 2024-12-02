@@ -61,8 +61,7 @@ module M = struct
     let res =
       List.count
         ~f:(fun levels ->
-          safe levels
-          || List.existsi levels ~f:(fun i _ -> safe (remove levels i)) )
+          List.existsi levels ~f:(fun i _ -> safe (remove levels i)) )
         reports
     in
     printf "Part 2: %d\n" res ; ()

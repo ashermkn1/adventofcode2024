@@ -8,6 +8,8 @@
     lwt_ssl
     ppx_expect
     core_unix
+    core
+    batteries
     ocamlgraph
     cmdliner
   )

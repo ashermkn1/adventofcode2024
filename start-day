@@ -1,0 +1,32 @@
+#!/bin/bash
+
+while getopts d: flag
+do
+  case "${flag}" in
+    d) day=${OPTARG};;
+    *) echo "Invalid flag"; exit;;
+  esac
+done
+# download input
+cargo aoc input -d "$day" -y "$(basename "$(find input -maxdepth 1 -type d)")"
+# create rust file
+cat >"src/day$day.rs" << EOF
+#[aoc_generator(day$day)]
+fn parse_input(input: &str) -> Vec<String> {
+  input.lines().map(str::to_owned).collect()
+}
+
+#[aoc(day$day, part1)]
+fn part1(input: &[String]) {
+  todo!()
+}
+
+#[aoc(day$day, part2)]
+fn part2(input: &[String]) {
+  todo!()
+}
+
+EOF
+touch src/day"$day".rs
+# add line to lib.rs
+sed -i "s/aoc_lib/mod day$day;\naoc_lib/" src/lib.rs

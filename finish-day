@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+while getopts d: flag
+do
+  case "${flag}" in
+    d) day=${OPTARG};;
+    *) echo "Invalid flag"; exit;;
+  esac
+done
+
+rustfmt "src/day$day.rs"
+git add --all
+git commit -m "day$day"

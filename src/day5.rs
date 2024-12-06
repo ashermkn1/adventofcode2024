@@ -47,7 +47,7 @@ fn parse_input(input: &str) -> Input {
             .split_once('|')
             .map(|(a, b)| (a.parse::<u32>().unwrap(), b.parse::<u32>().unwrap()))
             .unwrap();
-        map.entry(after).or_insert(HashSet::new()).insert(before);
+        map.entry(after).or_default().insert(before);
     }
     let updates = updates
         .lines()

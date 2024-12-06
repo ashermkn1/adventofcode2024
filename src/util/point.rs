@@ -24,6 +24,12 @@ impl Point {
     pub const fn new(x: i32, y: i32) -> Self {
         Self { x, y }
     }
+    pub const fn from_usize(x: usize, y: usize) -> Self {
+        Self {
+            x: x as i32,
+            y: y as i32,
+        }
+    }
     #[inline]
     pub fn clockwise(self) -> Self {
         Point::new(-self.y, self.x)
@@ -50,6 +56,7 @@ impl From<u8> for Point {
         }
     }
 }
+
 impl Mul<i32> for Point {
     type Output = Self;
     #[inline]

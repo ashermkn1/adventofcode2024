@@ -48,7 +48,7 @@ fn part1(input: &Grid<u8>) -> u32 {
     let mut res = 0;
     for row in 0..input.height {
         for col in 0..input.width {
-            let p = Point::new(col, row);
+            let p = Point::from_usize(col, row);
             res += search(input, p)
         }
     }
@@ -85,7 +85,7 @@ fn part2(grid: &Grid<u8>) -> u32 {
     let mut res = 0;
     for row in 0..grid.height {
         for col in 0..grid.width {
-            if cross(Point::new(col, row)) {
+            if cross(Point::from_usize(col, row)) {
                 res += 1;
             }
         }

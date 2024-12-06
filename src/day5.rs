@@ -15,7 +15,7 @@ impl Input {
             let rule = self
                 .before
                 .get(&page)
-                .unwrap_or(cell.get_or_init(|| HashSet::new()));
+                .unwrap_or(cell.get_or_init(HashSet::new));
             if !seen.is_subset(rule) {
                 return false;
             }

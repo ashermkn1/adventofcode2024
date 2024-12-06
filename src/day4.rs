@@ -1,6 +1,5 @@
 use crate::util::grid::Grid;
 use crate::util::point::{Point, DIAGONAL, ORTHOGONAL};
-#[feature(let_chains_2)]
 use itertools::Itertools;
 
 #[aoc_generator(day4)]

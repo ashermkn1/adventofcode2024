@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::ops::{Add, AddAssign, Mul, MulAssign, Sub, SubAssign};
 
 pub const ORIGIN: Point = Point::new(0, 0);

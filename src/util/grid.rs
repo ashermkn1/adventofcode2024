@@ -20,6 +20,7 @@ impl Grid<u8> {
 }
 
 impl<T: Copy + PartialEq> Grid<T> {
+    #[allow(dead_code)]
     pub fn find(&self, needle: T) -> Option<Point> {
         self.bytes.iter().position(|&h| h == needle).map(|index| {
             let x = (index as i32) % self.width;
@@ -27,6 +28,7 @@ impl<T: Copy + PartialEq> Grid<T> {
             Point::new(x, y)
         })
     }
+    #[allow(dead_code)]
     #[inline]
     pub fn contains(&self, point: Point) -> bool {
         point.x >= 0 && point.x < self.width && point.y >= 0 && point.y < self.height

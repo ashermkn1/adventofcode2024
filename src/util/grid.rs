@@ -42,8 +42,6 @@ impl<T: Copy + PartialEq> Grid<T> {
     }
 }
 
-
-
 impl<T> Grid<T> {
     #[allow(dead_code)]
     #[inline]
@@ -59,9 +57,10 @@ impl<T> Grid<T> {
             None
         }
     }
-    
+
     pub fn points(&self) -> impl Iterator<Item = Point> {
-        (0..self.height).cartesian_product(0..self.width)
+        (0..self.height)
+            .cartesian_product(0..self.width)
             .map(|(row, col)| Point::from_usize(col, row))
     }
 }

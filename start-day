@@ -11,19 +11,21 @@ done
 cargo aoc input -d "$day" -y "$(basename "$(find input -maxdepth 1 -type d)")"
 # create rust file
 cat >"src/day$day.rs" << EOF
+
+
 #[aoc_generator(day$day)]
 fn parse_input(input: &str) -> Vec<String> {
-  input.lines().map(str::to_owned).collect()
+    input.lines().map(str::to_owned).collect()
 }
 
 #[aoc(day$day, part1)]
 fn part1(input: &[String]) -> u32 {
-  todo!()
+    todo!()
 }
 
 #[aoc(day$day, part2)]
 fn part2(input: &[String]) -> u32 {
-  todo!()
+    todo!()
 }
 
 EOF

@@ -37,7 +37,7 @@ impl<T: Copy + PartialEq> Grid<T> {
         self.bytes.iter().position(|&h| h == needle).map(|index| {
             let x = index % self.width;
             let y = index / self.width;
-            Point::new(x as i32, y as i32)
+            Point::new(x as i64, y as i64)
         })
     }
 }
@@ -54,8 +54,8 @@ impl<T> Grid<T> {
     #[allow(dead_code)]
     #[inline]
     pub fn contains(&self, point: Point) -> bool {
-        let w = self.width as i32;
-        let h = self.height as i32;
+        let w = self.width as i64;
+        let h = self.height as i64;
         point.x >= 0 && point.x < w && point.y >= 0 && point.y < h
     }
     pub fn get(&self, point: Point) -> Option<&T> {
@@ -77,13 +77,13 @@ impl<T> Index<Point> for Grid<T> {
 
     #[inline]
     fn index(&self, point: Point) -> &Self::Output {
-        &self.bytes[((self.width as i32) * point.y + point.x) as usize]
+        &self.bytes[((self.width as i64) * point.y + point.x) as usize]
     }
 }
 
 impl<T> IndexMut<Point> for Grid<T> {
     #[inline]
     fn index_mut(&mut self, point: Point) -> &mut Self::Output {
-        &mut self.bytes[((self.width as i32) * point.y + point.x) as usize]
+        &mut self.bytes[((self.width as i64) * point.y + point.x) as usize]
     }
 }

@@ -11,6 +11,9 @@ struct Machine {
 }
 
 impl Machine {
+    // calculate the inverse of the coefficient matrix
+    // and multiply this by the prize vector
+    // this gives us our unique solution
     fn min_tokens(&self) -> Option<u64> {
         // calculate inverse of matrix
         // ax bx

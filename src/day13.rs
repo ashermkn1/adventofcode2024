@@ -1,7 +1,7 @@
 use crate::util::point::Point;
 use itertools::Itertools;
 use regex::Regex;
-use std::cmp::{max, min};
+use std::cmp::min;
 
 #[derive(Clone)]
 struct Machine {
@@ -82,7 +82,7 @@ fn part1(machines: &[Machine]) -> u32 {
                 for b in 0..=max_b {
                     if machine.a * a + machine.b * b == machine.prize {
                         let tokens = 3 * a + b;
-                        if let Some(t) = min_tokens {
+                        if min_tokens.is_some() {
                             min_tokens = min(min_tokens, Some(tokens))
                         } else {
                             min_tokens = Some(tokens)

@@ -1,8 +1,7 @@
 use crate::util::grid::Grid;
 use crate::util::heap::MinHeap;
-use crate::util::point::{Point, DOWN, LEFT, ORTHOGONAL, RIGHT, UP};
-use std::cell::OnceCell;
-use std::collections::{HashSet, VecDeque};
+use crate::util::point::{Point, DOWN, LEFT, RIGHT, UP};
+use std::collections::VecDeque;
 
 const DIRS: [Point; 4] = [RIGHT, DOWN, LEFT, UP];
 #[aoc_generator(day16)]

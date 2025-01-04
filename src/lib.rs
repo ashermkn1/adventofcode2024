@@ -6,6 +6,7 @@ mod util {
     pub mod point;
     pub mod parse;
     pub mod heap;
+    pub mod union_find;
 }
 mod day1;
 mod day2;
@@ -24,4 +25,5 @@ mod day14;
 mod day15;
 mod day16;
 mod day17;
+mod day18;
 aoc_lib! { year = 2024 }

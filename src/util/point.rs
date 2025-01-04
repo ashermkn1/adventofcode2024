@@ -1,4 +1,6 @@
 #![allow(dead_code)]
+
+use std::fmt::{Display, Formatter};
 use std::ops::{Add, AddAssign, Mul, MulAssign, Sub, SubAssign};
 
 pub const ORIGIN: Point = Point::new(0, 0);
@@ -19,6 +21,11 @@ pub struct Point {
     pub y: i64,
 }
 
+impl Display for Point {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
+    }
+}
 impl Point {
     #[inline]
     pub const fn new(x: i64, y: i64) -> Self {

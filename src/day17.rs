@@ -1,6 +1,5 @@
 use itertools::Itertools;
 use std::collections::HashSet;
-use tqdm::tqdm;
 
 #[derive(Copy, Clone)]
 struct State {

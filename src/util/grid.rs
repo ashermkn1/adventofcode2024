@@ -42,6 +42,15 @@ impl<T: Copy + PartialEq> Grid<T> {
     }
 }
 
+impl<T: Copy> Grid<T> {
+    pub fn new(height: usize, width: usize, val: T) -> Self {
+        Self {
+            height,
+            width,
+            bytes: vec![val; height * width]
+        }
+    }
+}
 impl<T> Grid<T> {
     
     pub fn same_size_with<U: Copy>(&self, value: U) -> Grid<U> {

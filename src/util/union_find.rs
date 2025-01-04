@@ -1,8 +1,8 @@
 use std::collections::hash_map::Entry;
 use std::collections::HashMap;
 use std::hash::Hash;
-use std::mem::swap;
 
+#[allow(dead_code)]
 struct Node<T: Eq + Copy> {
     value: T,
     parent: T,
@@ -25,6 +25,7 @@ pub struct UnionFind<T: Eq + Copy + Hash> {
 }
 
 impl<T: Eq + Copy + Hash> UnionFind<T> {
+    #[allow(dead_code)]
     pub fn new(keys: &[T]) -> Self {
         let mut forest = HashMap::new();
         for &k in keys {
@@ -50,6 +51,7 @@ impl<T: Eq + Copy + Hash> UnionFind<T> {
             num_trees
         }
     }
+    #[allow(dead_code)]
     pub fn add(&mut self, key: T) {
         if let Entry::Vacant(e) = self.forest.entry(key) {
             e.insert(Node::new(key));

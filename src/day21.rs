@@ -1,5 +1,4 @@
 use crate::util::point::{Point, ORIGIN};
-use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
 use std::iter::{once, repeat_n};
 

@@ -27,7 +27,7 @@ impl Secret {
 
     fn iter(&self) -> SecretIter {
         SecretIter {
-            secret: self.clone(),
+            secret: *self,
             steps: 0,
         }
     }

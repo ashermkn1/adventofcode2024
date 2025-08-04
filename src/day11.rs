@@ -16,7 +16,7 @@ impl Stones {
             if engraved == 0 {
                 *next.entry(1).or_default() += count
             } else if (engraved.ilog10() + 1) % 2 == 0 {
-                let split = 10u64.pow((engraved.ilog10() + 1) / 2);
+                let split = 10u64.pow(engraved.ilog10().div_ceil(2));
 
                 // left half
                 *next.entry(engraved / split).or_default() += count;

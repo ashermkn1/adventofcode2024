@@ -14,14 +14,14 @@ impl<T: Eq + Copy> Node<T> {
         Self {
             value,
             parent: value,
-            size: 1
+            size: 1,
         }
     }
 }
 
 pub struct UnionFind<T: Eq + Copy + Hash> {
     forest: HashMap<T, Node<T>>,
-    num_trees: usize
+    num_trees: usize,
 }
 
 impl<T: Eq + Copy + Hash> UnionFind<T> {
@@ -34,10 +34,10 @@ impl<T: Eq + Copy + Hash> UnionFind<T> {
 
         Self {
             forest,
-            num_trees: keys.len()
+            num_trees: keys.len(),
         }
     }
-    
+
     pub fn from_iter(keys: impl Iterator<Item = T>) -> Self {
         let mut forest = HashMap::new();
         let mut num_trees = 0;
@@ -46,10 +46,7 @@ impl<T: Eq + Copy + Hash> UnionFind<T> {
             num_trees += 1;
         }
 
-        Self {
-            forest,
-            num_trees
-        }
+        Self { forest, num_trees }
     }
     #[allow(dead_code)]
     pub fn add(&mut self, key: T) {
@@ -62,23 +59,24 @@ impl<T: Eq + Copy + Hash> UnionFind<T> {
     pub fn find(&mut self, key: T) -> T {
         let mut curr = key;
         while self.forest[&curr].parent != curr {
-            self.forest.get_mut(&curr).unwrap().parent = self.forest[&self.forest[&curr].parent].parent;
+            self.forest.get_mut(&curr).unwrap().parent =
+                self.forest[&self.forest[&curr].parent].parent;
             curr = self.forest[&curr].parent;
         }
         curr
     }
-    
+
     pub fn union(&mut self, k1: T, k2: T) {
         let x = self.find(k1);
         let y = self.find(k2);
-        
+
         if x != y {
             let (x, y) = if self.forest[&x].size < self.forest[&y].size {
                 (y, x)
             } else {
                 (x, y)
             };
-            
+
             self.forest.get_mut(&y).unwrap().parent = x;
             self.forest.get_mut(&x).unwrap().size += self.forest[&y].size;
             self.num_trees -= 1;

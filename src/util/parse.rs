@@ -1,4 +1,3 @@
-
 pub trait ToDigit {
     fn to_digit(&self) -> Option<u8>;
 }

@@ -28,7 +28,7 @@ impl Display for Grid<u8> {
             .chunks(self.width)
             .map(|row| String::from_utf8(row.to_vec()).unwrap())
             .join("\n");
-        write!(f, "{}", s)
+        write!(f, "{s}")
     }
 }
 impl<T: Copy + PartialEq> Grid<T> {
@@ -47,17 +47,16 @@ impl<T: Copy> Grid<T> {
         Self {
             height,
             width,
-            bytes: vec![val; height * width]
+            bytes: vec![val; height * width],
         }
     }
 }
 impl<T> Grid<T> {
-    
     pub fn same_size_with<U: Copy>(&self, value: U) -> Grid<U> {
         Grid {
             height: self.height,
             width: self.width,
-            bytes: vec![value; self.height * self.width]
+            bytes: vec![value; self.height * self.width],
         }
     }
     #[allow(dead_code)]

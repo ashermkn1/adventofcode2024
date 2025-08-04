@@ -6,17 +6,17 @@ type Wires = HashMap<String, bool>;
 
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
 enum Operator {
-    AND,
-    OR,
-    XOR,
+    And,
+    Or,
+    Xor,
 }
 
 impl Operator {
     fn apply(&self, lhs: bool, rhs: bool) -> bool {
         match self {
-            AND => lhs && rhs,
-            OR => lhs || rhs,
-            XOR => lhs != rhs,
+            And => lhs && rhs,
+            Or => lhs || rhs,
+            Xor => lhs != rhs,
         }
     }
 }
@@ -84,9 +84,9 @@ fn parse_input(input: &str) -> System {
         .map(|line| {
             let (in1, op, in2, _, out) = line.split_ascii_whitespace().collect_tuple().unwrap();
             let op = match op {
-                "AND" => AND,
-                "OR" => OR,
-                "XOR" => XOR,
+                "AND" => And,
+                "OR" => Or,
+                "XOR" => Xor,
                 _ => unreachable!(),
             };
             Gate {
@@ -120,27 +120,27 @@ fn part2(System { gates, .. }: &System) -> String {
     for Gate { in1, in2, out, op } in gates {
         match op {
             // Each AND should output to an OR, except the half-adder output
-            AND => {
-                if in1 != "x00" && in2 != "x00" && !wire_gate.contains(&(out.clone(), OR)) {
+            And => {
+                if in1 != "x00" && in2 != "x00" && !wire_gate.contains(&(out.clone(), Or)) {
                     swapped.insert(out);
                 }
             }
-            OR => {
+            Or => {
                 // The only output that OR is allowed to be connected to is z45
                 if out.starts_with('z') && out != "z45" {
                     swapped.insert(out);
                 }
                 // ORs go to carry out, which are AND/XOR and so should never point to
                 // another OR
-                if wire_gate.contains(&(out.clone(), OR)) {
+                if wire_gate.contains(&(out.clone(), Or)) {
                     swapped.insert(out);
                 }
             }
-            XOR => {
+            Xor => {
                 // XORs come in two levels, the first level is between xs and ys
                 // these all point to other XORs except the first one
                 if in1.starts_with('x') || in2.starts_with('x') {
-                    if in1 != "x00" && in2 != "x00" && !wire_gate.contains(&(out.clone(), XOR)) {
+                    if in1 != "x00" && in2 != "x00" && !wire_gate.contains(&(out.clone(), Xor)) {
                         swapped.insert(out);
                     }
                 } else if !out.starts_with('z') {

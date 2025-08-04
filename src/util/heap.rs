@@ -3,7 +3,7 @@ use std::collections::BinaryHeap;
 
 struct Wrapper<K: Ord, V> {
     key: K,
-    value: V
+    value: V,
 }
 
 impl<K: Ord, V> Eq for Wrapper<K, V> {}
@@ -28,19 +28,21 @@ impl<K: Ord, V> Ord for Wrapper<K, V> {
 
 #[derive(Default)]
 pub struct MinHeap<K: Ord, V> {
-    heap: BinaryHeap<Wrapper<K, V>>
+    heap: BinaryHeap<Wrapper<K, V>>,
 }
 
 impl<K: Ord, V> MinHeap<K, V> {
     pub fn new() -> Self {
         Self {
-            heap: BinaryHeap::new()
+            heap: BinaryHeap::new(),
         }
     }
 
     #[allow(dead_code)]
     pub fn with_capacity(capacity: usize) -> Self {
-        MinHeap { heap: BinaryHeap::with_capacity(capacity) }
+        MinHeap {
+            heap: BinaryHeap::with_capacity(capacity),
+        }
     }
 
     pub fn push(&mut self, key: K, value: V) {
@@ -50,7 +52,7 @@ impl<K: Ord, V> MinHeap<K, V> {
     pub fn pop(&mut self) -> Option<(K, V)> {
         self.heap.pop().map(|w| (w.key, w.value))
     }
-    
+
     #[allow(dead_code)]
     pub fn peek(&self) -> Option<(&K, &V)> {
         self.heap.peek().map(|w| (&w.key, &w.value))

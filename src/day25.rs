@@ -2,10 +2,9 @@ use std::str::FromStr;
 
 use itertools::Itertools;
 
-
 struct Schematic {
     is_key: bool,
-    heights: [u8; 5]
+    heights: [u8; 5],
 }
 
 impl Schematic {
@@ -13,7 +12,10 @@ impl Schematic {
         if self.is_key == other.is_key {
             return false;
         }
-        self.heights.iter().zip(other.heights).all(|(&a, b)| a + b <= 7)
+        self.heights
+            .iter()
+            .zip(other.heights)
+            .all(|(&a, b)| a + b <= 7)
     }
 }
 impl FromStr for Schematic {
@@ -36,12 +38,15 @@ impl FromStr for Schematic {
 
 #[aoc(day25, part1)]
 fn part1(input: &str) -> u32 {
-    let schematics = input.split("\n\n").map(|x| Schematic::from_str(x).unwrap()).collect_vec();
+    let schematics = input
+        .split("\n\n")
+        .map(|x| Schematic::from_str(x).unwrap())
+        .collect_vec();
     let mut res = 0;
     let (keys, locks): (Vec<_>, Vec<_>) = schematics.into_iter().partition(|s| s.is_key);
     for key in keys {
         for lock in &locks {
-            if key.fits(&lock) {
+            if key.fits(lock) {
                 res += 1;
             }
         }
@@ -53,4 +58,3 @@ fn part1(input: &str) -> u32 {
 fn part2(_: &str) -> u32 {
     0
 }
-
